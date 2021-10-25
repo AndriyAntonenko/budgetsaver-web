@@ -1,0 +1,11 @@
+:root {
+  /* colors */
+  --color-white: #FFFFFF;
+  --color-background: #F3F6FC;
+  --color-black: #000000;
+  --color-pantone: #f9e547;
+  --color-ultimate-gray: #939597;
+
+  /* shadows */
+  --shadow-main: rgba(207, 216, 220, 0.4);
+}

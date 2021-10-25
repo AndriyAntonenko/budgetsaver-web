@@ -1,0 +1,11 @@
+@import "../../styles/colors.css";
+
+.card {
+  min-width: 320px;
+  padding: 20px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-light-grey);
+  box-sizing: border-box;
+  box-shadow: -20px 20px 40px var(--shadow-main);
+  border-radius: 5px;
+}
