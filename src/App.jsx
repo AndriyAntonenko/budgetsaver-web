@@ -1,7 +1,7 @@
-import { SignUpScreen } from "./screens/sign-up";
+import { RootRouter } from "./router";
 
 function App() {
-  return <SignUpScreen />;
+  return <RootRouter />;
 }
 
 export default App;

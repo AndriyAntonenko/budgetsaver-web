@@ -1,12 +1,12 @@
-.signUpForm {
+.signInForm {
   width: 450px;
 }
 
-.signUpForm__button {
+.signInForm__button {
   margin-top: 20px;
 }
 
-.signUpForm__link {
+.signInForm__link {
   display: block;
   margin-top: 10px;
 }

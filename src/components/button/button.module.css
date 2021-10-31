@@ -34,8 +34,8 @@
 
 .button:hover {
   background-color: var(--color-pantone);
-  color: var(--color-ultimate-gray);
-  border-color: var(--color-ultimate-gray);
+  color: var(--color-black);
+  border-color: var(--color-black);
   fill: var(--color-ultimate-gray);
 }
 
