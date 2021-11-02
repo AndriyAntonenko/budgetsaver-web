@@ -1,23 +1,23 @@
 import React from "react";
-import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-import { SignUpScreen } from "../screens/sign-up";
-import { SignInScreen } from "../screens/sign-in";
+import { AuthRouter } from "./auth.router";
+import { NoAuthRouter } from "./no-auth.router";
+import { useStore } from "../storage";
 
-export const RootRouter = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/sign-up">
-          <SignUpScreen />
-        </Route>
-        <Route path="/login">
-          <SignInScreen />
-        </Route>
-        <Route path="*">
-          <Redirect to="/login" />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
-};
+export const RootRouter = observer(
+  () => {
+    const { authStore } = useStore();
+
+    React.useEffect(() => {
+      authStore.checkIsAuth();
+    }, [authStore]);
+  
+    if (!authStore.isAuthenticationChecked) {
+      // @TODO: Show loader
+      return null;
+    }
+
+    return authStore.isAuthenticated ? <AuthRouter /> : <NoAuthRouter />;
+  }
+);

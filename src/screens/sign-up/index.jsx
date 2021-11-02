@@ -1,16 +1,26 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
 import { Screen } from "../../components/screen";
 import { Card } from "../../components/card";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import { Link } from "../../components/link";
+import { useStore } from "../../storage";
 import styles from "./sign-up.module.css";
 
 export const SignUpScreen = () => {
   const { register, handleSubmit } = useForm();
+  const history = useHistory();
+  const { authStore } = useStore();
 
-  const onSubmit = data => console.info(data);
+  const onSubmit = async data => {
+    const success = await authStore.signUp(data);
+    if (success) {
+      history.push("/");
+    }
+  };
 
   return (
     <Screen centered>

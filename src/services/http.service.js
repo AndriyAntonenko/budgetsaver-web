@@ -1,3 +1,5 @@
+import { StorageService, TOKENS_KEY } from "./storage.service";
+
 export class HttpService {
   static #instance;
 
@@ -13,7 +15,6 @@ export class HttpService {
   }
 
   #baseUrl = null;
-  #authorization = null;
 
   /**
    * 
@@ -21,16 +22,6 @@ export class HttpService {
    */
   constructor(baseUrl) {
     this.#baseUrl = baseUrl;
-  }
-
-  /**
-   * 
-   * @param {string} authorization 
-   * @returns {HttpService}
-   */
-  setAuthorization(authorization) {
-    this.#authorization = authorization;
-    return this;
   }
 
   /**
@@ -52,8 +43,8 @@ export class HttpService {
    * @returns {Response}
    */
   makeRequest(path, method, headers, body) {
-    const url = `${this.#baseUrl}/${path}`;
-    return fetch({ url, method, headers, body });
+    const url = `${this.#baseUrl}${path}`;
+    return fetch(url, { method, headers, body });
   }
 
   /**
@@ -63,8 +54,9 @@ export class HttpService {
   buildJSONHeaders() {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
-    if (this.#authorization) {
-      headers.append("Authorization", this.#authorization);
+    const authorization = StorageService.use().getObj(TOKENS_KEY);
+    if (authorization && authorization.accessToken) {
+      headers.append("Authorization", `Bearer ${authorization.accessToken}`);
     }
     return headers;
   }
@@ -88,7 +80,7 @@ export class HttpService {
    */
   async postJSON(path, body) {
     const headers = this.buildJSONHeaders();
-    const response = await this.makeRequest(path, "POST", headers, body);
+    const response = await this.makeRequest(path, "POST", headers, JSON.stringify(body));
     return response.json();
   }
 }

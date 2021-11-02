@@ -22,4 +22,8 @@ export class AuthApiService {
   signUp(payload) {
     return HttpService.request().postJSON("/api/auth/sign-up", payload);
   }
+
+  login(payload) {
+    return HttpService.request().postJSON("/api/auth/login", payload);
+  }
 }
