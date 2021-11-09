@@ -10,9 +10,9 @@ export const WelcomeMessage = observer(
 
     return (
       <p className={cn(styles.welcomeMessage, className)}>
-        Welcome, {profileStore.profile.name} (<span className={styles.welcomeMessage__email}>
-          {profileStore.profile.email}
-        </span>)!
+        Welcome to 
+        {' '}<span className={styles.welcomeMessage__appName}>BudgetSaver</span>, {profileStore.profile.name} 
+        (<span className={styles.welcomeMessage__email}>{profileStore.profile.email}</span>)!
       </p>
     );
   }
