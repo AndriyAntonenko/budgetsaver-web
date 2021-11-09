@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { AuthRouter } from "./auth.router";
 import { NoAuthRouter } from "./no-auth.router";
+import { Loader } from "../components/loader";
 import { useStore } from "../storage";
 
 export const RootRouter = observer(
@@ -15,7 +16,7 @@ export const RootRouter = observer(
   
     if (!authStore.isAuthenticationChecked) {
       // @TODO: Show loader
-      return null;
+      return <Loader fullScreen/>;
     }
 
     return authStore.isAuthenticated ? <AuthRouter /> : <NoAuthRouter />;
