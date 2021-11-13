@@ -30,9 +30,13 @@ export class AuthStore {
    */
   async login(payload) {
     try {
-      const authData = await AuthApiService.request().login(payload);
+      const { payload: authData, status } = await AuthApiService.request().login(payload);
+      if (status !== 200) {
+        // @TODO: Handler error
+        return;
+      }
       this.applyAuthData(authData);
-      return true;   
+      return true;
     } catch (error) {
       console.error(error);
       return false;
@@ -46,7 +50,11 @@ export class AuthStore {
    */
   async signUp(payload) {
     try {
-      const authData = await AuthApiService.request().signUp(payload);
+      const { payload: authData, status } = await AuthApiService.request().signUp(payload);
+      if (status !== 201) {
+        // @TODO: Handler error
+        return;
+      }
       this.applyAuthData(authData);
       return true;    
     } catch (error) {
@@ -69,11 +77,15 @@ export class AuthStore {
    * 
    * @returns {boolean}
    */
-  checkIsAuth() {
-    const authData = StorageService.use().getObj(TOKENS_KEY);
-    const isAuthenticated = !!authData;
-    this.setIsAuthenticated(isAuthenticated);
-    this.isAuthenticationChecked = true;
-    return isAuthenticated;
+  async checkIsAuth() {
+    try {
+      const { status } = await AuthApiService.request().checkAuth();
+      const isAuthenticated = status === 204;
+      this.setIsAuthenticated(isAuthenticated);
+      this.isAuthenticationChecked = true;
+      return isAuthenticated; 
+    } catch (error) {
+      console.info(error);
+    }
   }
 }

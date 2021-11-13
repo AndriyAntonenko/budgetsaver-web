@@ -14,6 +14,7 @@ export const RootRouter = observer(
       authStore.checkIsAuth();
     }, [authStore]);
   
+    console.info(authStore.isAuthenticationChecked);
     if (!authStore.isAuthenticationChecked) {
       // @TODO: Show loader
       return <Loader fullScreen/>;

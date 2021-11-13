@@ -1,5 +1,12 @@
 import { StorageService, TOKENS_KEY } from "./storage.service";
 
+/**
+ * @typedef {Object} JSONApiResponse
+ * @property {number} status
+ * @property {any} payload
+ */
+
+
 export class HttpService {
   static #instance;
 
@@ -63,24 +70,50 @@ export class HttpService {
 
   /**
    * 
+   * @param {Response} response
+   * @returns {Promise<JSONApiResponse>}
+   */
+  async buildResponse(response) {
+    return {
+      status: response.status,
+      payload: await this.extractJSON(response)
+    };
+  }
+
+  /**
+   * 
+   * @param {Response} response
+   * @returns {Promise<any>}
+   */
+  async extractJSON(response) {
+    try {
+      const json = await response.json();
+      return json;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  /**
+   * 
    * @param {string} path 
-   * @returns {any}
+   * @returns {JSONApiResponse}
    */
   async getJSON(path) {
     const headers = this.buildJSONHeaders();
     const response = await this.makeRequest(path, "GET", headers);
-    return response.json();
+    return this.buildResponse(response);
   }
 
   /**
    * 
    * @param {string} path 
    * @param {any} body 
-   * @returns {any}
+   * @returns {JSONApiResponse}
    */
   async postJSON(path, body) {
     const headers = this.buildJSONHeaders();
     const response = await this.makeRequest(path, "POST", headers, JSON.stringify(body));
-    return response.json();
+    return this.buildResponse(response);
   }
 }

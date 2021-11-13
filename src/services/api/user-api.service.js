@@ -5,7 +5,7 @@ export class UserApiService {
 
   /**
    * 
-   * @returns {AuthApiService}
+   * @returns {UserApiService}
    */
   static request() {
     if (!UserApiService.#instance) {
@@ -17,7 +17,7 @@ export class UserApiService {
   /**
    * 
    * @param {any} payload 
-   * @returns {any}
+   * @returns {import("../http.service").JSONApiResponse}
    */
   me() {
     return HttpService.request().getJSON("/api/auth/me");

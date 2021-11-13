@@ -17,13 +17,26 @@ export class AuthApiService {
   /**
    * 
    * @param {any} payload 
-   * @returns {any}
+   * @returns {import("../http.service").JSONApiResponse}
    */
   signUp(payload) {
     return HttpService.request().postJSON("/api/auth/sign-up", payload);
   }
 
+  /**
+   * 
+   * @param {any} payload 
+   * @returns {import("../http.service").JSONApiResponse}
+   */
   login(payload) {
     return HttpService.request().postJSON("/api/auth/login", payload);
+  }
+
+   /**
+   * 
+   * @returns {import("../http.service").JSONApiResponse}
+   */
+  checkAuth() {
+    return HttpService.request().getJSON("/api/auth/check-auth");
   }
 }

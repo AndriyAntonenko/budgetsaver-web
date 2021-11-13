@@ -32,7 +32,7 @@ export class ProfileStore {
 
   async fetchProfile() {
     try {
-      const userProfile = await UserApiService.request().me();
+      const { payload: userProfile } = await UserApiService.request().me();
       this.setProfile(userProfile);
     } catch (error) {
       console.error(error);
