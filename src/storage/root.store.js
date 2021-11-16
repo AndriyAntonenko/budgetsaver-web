@@ -1,5 +1,6 @@
 import { AuthStore } from "./auth.store";
 import { ProfileStore } from "./profile.store";
+import { ModalStore } from "./modal.store";
 
 /**
  * @class
@@ -14,5 +15,6 @@ export class RootStore {
      */
     this.authStore = new AuthStore();
     this.profileStore = new ProfileStore();
+    this.modalStore = new ModalStore();
   }
 }
