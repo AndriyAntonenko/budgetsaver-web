@@ -1,6 +1,7 @@
 @import "../../styles/colors.css";
 
 .groupCard__container {
+  position: relative;
   min-width: 300px;
   height: 200px;
   max-width: 450px;
@@ -8,6 +9,7 @@
   cursor: pointer;
 
   padding: 10px;
+  margin: 10px;
 
   border-radius: 10px;
   background-color: var(--color-white);
@@ -40,4 +42,46 @@
   width: 120px;
   height: 120px;
   fill: var(--color-ultimate-gray);
+}
+
+.groupCard__name {
+  font-size: 28px;
+  line-height: 0;
+}
+
+.groupCard__description {
+  font-weight: 500;
+}
+
+.groupCard__separator {
+  height: 4px;
+  width: 100%;
+
+  background-color: var(--color-pantone);
+}
+
+.groupCard__membersCount {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 22px;
+}
+
+.groupCart__memberIconWrapper {
+  width: 25px;
+  height: 25px;
+}
+
+.groupCart__memberIconWrapper svg {
+  width: 25px;
+  height: 25px;
+  fill: var(--color-ultimate-gray);
+}
+
+.groupCard__container:hover .groupCart__memberIconWrapper > svg {
+  fill: var(--color-black);
 }

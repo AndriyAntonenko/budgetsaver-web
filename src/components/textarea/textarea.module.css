@@ -1,0 +1,21 @@
+@import "../../styles/colors.css";
+
+.textarea {
+  box-sizing: border-box;
+  min-width: 100%;
+  margin-top: 15px;
+
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  color: var(--color-ultimate-gray);
+
+  border: 2px solid var(--color-black);
+  outline: none;
+}
+
+.textarea:focus {
+  border: 3px solid var(--color-black);
+}
